@@ -2,16 +2,20 @@
 (function() {
 
   jQuery(function() {
-    var $mailLink, popbox,
+    var $mailLink, $moreMails, popbox,
       _this = this;
     popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\" target=\"_blank\">查看全部邮件</a>\n  </div>\n</div>";
     $mailLink = $('.top-nav-info a').first();
+    $mailLink.after(popbox);
+    $moreMails = $('#more-mails');
+    $('body').click(function() {
+      return $moreMails.hide();
+    });
     $mailLink.parent().css('position', 'relative');
-    $mailLink.click(function() {
-      var $mailLoding, $moreMails;
+    return $mailLink.click(function() {
+      var $mailLoding;
       $mailLoding = $('#mail-loading');
       $mailLoding.show();
-      $moreMails = $('#more-mails');
       $moreMails.find('ul').empty();
       $moreMails.toggle();
       $.get('http://www.douban.com/doumail/', function(res) {
@@ -46,7 +50,6 @@
       });
       return false;
     });
-    return $mailLink.after(popbox);
   });
 
 }).call(this);

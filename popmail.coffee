@@ -15,11 +15,17 @@ jQuery ->
   """
 
   $mailLink = $('.top-nav-info a').first()
+  $mailLink.after(popbox)
+
+  $moreMails = $('#more-mails')
+
+  $('body').click ->
+    $moreMails.hide()
+
   $mailLink.parent().css('position', 'relative');
   $mailLink.click =>
     $mailLoding = $('#mail-loading')
     $mailLoding.show();
-    $moreMails = $('#more-mails')
     $moreMails.find('ul').empty()
     $moreMails.toggle()
     $.get('http://www.douban.com/doumail/', (res)->
@@ -56,5 +62,4 @@ jQuery ->
     )
 
     return false
-  $mailLink.after(popbox)
 
