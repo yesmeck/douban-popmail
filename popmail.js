@@ -3,10 +3,13 @@
 
   jQuery(function() {
     var _this = this;
-    this.popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\">查看全部邮件</a>\n  </div>\n</div>";
+    this.popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\">查看全部邮件</a>\n  </div>\n</div>";
     this.mailLink = $('.top-nav-info a').first();
     this.mailLink.parent().css('position', 'relative');
     this.mailLink.click(function() {
+      $('#mail-loading').show();
+      $('#more-mails').find('ul').empty();
+      $('#more-mails').toggle();
       $.get('http://www.douban.com/doumail/', function(res) {
         var mails, match, regex, table;
         mails = [];
@@ -31,12 +34,11 @@
             });
           }
         });
-        $('#more-mails').find('ul').empty();
+        $('#mail-loading').hide();
         $.each(mails, function(index, mail) {
           return $('#more-mails').find('ul').append("<li><div id='mail_notify_" + index + "' class='item-req'>来之" + mail.from + "的" + mail.topic + " - " + mail.time + "</div></li>");
         });
-        $('#more-mails').find('ul a').attr('target', '_blank');
-        return $('#more-mails').toggle();
+        return $('#more-mails').find('ul a').attr('target', '_blank');
       });
       return false;
     });

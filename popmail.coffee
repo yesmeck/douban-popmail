@@ -7,6 +7,7 @@ jQuery ->
   @popbox = """
     <div id="more-mails" class="more-items">
       <div class="bd">
+        <p id="mail-loading" style="display: none;">邮件读取中...</p>
         <ul>
         </ul>
       </div>
@@ -19,6 +20,9 @@ jQuery ->
   @mailLink = $('.top-nav-info a').first()
   @mailLink.parent().css('position', 'relative');
   @mailLink.click =>
+    $('#mail-loading').show();
+    $('#more-mails').find('ul').empty()
+    $('#more-mails').toggle()
     $.get('http://www.douban.com/doumail/', (res)->
       mails = []
       regex = /<table class="olt".+>[^]+<\/table>/gm
@@ -39,12 +43,11 @@ jQuery ->
             time: time
           )
       )
-      $('#more-mails').find('ul').empty()
+      $('#mail-loading').hide();
       $.each(mails, (index, mail)->
         $('#more-mails').find('ul').append("<li><div id='mail_notify_#{index}' class='item-req'>来之#{mail.from}的#{mail.topic} - #{mail.time}</div></li>")
       )
       $('#more-mails').find('ul a').attr('target', '_blank')
-      $('#more-mails').toggle()
     )
 
     return false
