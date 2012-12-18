@@ -1,7 +1,4 @@
-#
 # Author: Meck <yesmeck@gmail.com>
-#
-
 
 jQuery ->
   popbox = """
