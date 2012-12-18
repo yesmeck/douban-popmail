@@ -9,7 +9,7 @@ jQuery ->
         </ul>
       </div>
       <div class="ft">
-        <a href="http://www.douban.com/doumail/" target="_blank">查看全部邮件</a>
+        <a href="http://www.douban.com/doumail/" target="_blank">查看全部豆邮</a>
       </div>
     </div>
   """

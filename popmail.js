@@ -4,7 +4,7 @@
   jQuery(function() {
     var $mailLink, $moreMails, popbox,
       _this = this;
-    popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\" target=\"_blank\">查看全部邮件</a>\n  </div>\n</div>";
+    popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\" target=\"_blank\">查看全部豆邮</a>\n  </div>\n</div>";
     $mailLink = $('.top-nav-info a').first();
     $mailLink.after(popbox);
     $moreMails = $('#more-mails');
