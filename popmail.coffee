@@ -47,7 +47,13 @@ jQuery ->
       )
       $mailLoding.hide();
       $.each(mails, (index, mail)->
-        $moreMails.find('ul').append("<li><div id='mail_notify_#{index}' class='item-req'>来之#{mail.from}的#{mail.topic} - #{mail.time}</div></li>")
+        $moreMails.find('ul').append("
+          <li>
+            <div id='mail_notify_#{index}' class='item-req'>
+              来之#{mail.from}的#{mail.topic} - #{mail.time}
+            </div>
+          </li>"
+        )
       )
       $moreMails.find('ul a').attr('target', '_blank')
     )
