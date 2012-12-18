@@ -4,7 +4,7 @@
 
 
 jQuery ->
-  @popbox = """
+  popbox = """
     <div id="more-mails" class="more-items">
       <div class="bd">
         <p id="mail-loading" style="display: none;">邮件读取中...</p>
@@ -12,17 +12,19 @@ jQuery ->
         </ul>
       </div>
       <div class="ft">
-        <a href="http://www.douban.com/doumail/">查看全部邮件</a>
+        <a href="http://www.douban.com/doumail/" target="_blank">查看全部邮件</a>
       </div>
     </div>
   """
 
-  @mailLink = $('.top-nav-info a').first()
-  @mailLink.parent().css('position', 'relative');
-  @mailLink.click =>
-    $('#mail-loading').show();
-    $('#more-mails').find('ul').empty()
-    $('#more-mails').toggle()
+  $mailLink = $('.top-nav-info a').first()
+  $mailLink.parent().css('position', 'relative');
+  $mailLink.click =>
+    $mailLoding = $('#mail-loading')
+    $mailLoding.show();
+    $moreMails = $('#more-mails')
+    $moreMails.find('ul').empty()
+    $moreMails.toggle()
     $.get('http://www.douban.com/doumail/', (res)->
       mails = []
       regex = /<table class="olt".+>[^]+<\/table>/gm
@@ -43,13 +45,13 @@ jQuery ->
             time: time
           )
       )
-      $('#mail-loading').hide();
+      $mailLoding.hide();
       $.each(mails, (index, mail)->
-        $('#more-mails').find('ul').append("<li><div id='mail_notify_#{index}' class='item-req'>来之#{mail.from}的#{mail.topic} - #{mail.time}</div></li>")
+        $moreMails.find('ul').append("<li><div id='mail_notify_#{index}' class='item-req'>来之#{mail.from}的#{mail.topic} - #{mail.time}</div></li>")
       )
-      $('#more-mails').find('ul a').attr('target', '_blank')
+      $moreMails.find('ul a').attr('target', '_blank')
     )
 
     return false
-  @mailLink.after(@popbox)
+  $mailLink.after(popbox)
 

@@ -2,14 +2,18 @@
 (function() {
 
   jQuery(function() {
-    var _this = this;
-    this.popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\">查看全部邮件</a>\n  </div>\n</div>";
-    this.mailLink = $('.top-nav-info a').first();
-    this.mailLink.parent().css('position', 'relative');
-    this.mailLink.click(function() {
-      $('#mail-loading').show();
-      $('#more-mails').find('ul').empty();
-      $('#more-mails').toggle();
+    var $mailLink, popbox,
+      _this = this;
+    popbox = "<div id=\"more-mails\" class=\"more-items\">\n  <div class=\"bd\">\n    <p id=\"mail-loading\" style=\"display: none;\">邮件读取中...</p>\n    <ul>\n    </ul>\n  </div>\n  <div class=\"ft\">\n    <a href=\"http://www.douban.com/doumail/\" target=\"_blank\">查看全部邮件</a>\n  </div>\n</div>";
+    $mailLink = $('.top-nav-info a').first();
+    $mailLink.parent().css('position', 'relative');
+    $mailLink.click(function() {
+      var $mailLoding, $moreMails;
+      $mailLoding = $('#mail-loading');
+      $mailLoding.show();
+      $moreMails = $('#more-mails');
+      $moreMails.find('ul').empty();
+      $moreMails.toggle();
       $.get('http://www.douban.com/doumail/', function(res) {
         var mails, match, regex, table;
         mails = [];
@@ -34,15 +38,15 @@
             });
           }
         });
-        $('#mail-loading').hide();
+        $mailLoding.hide();
         $.each(mails, function(index, mail) {
-          return $('#more-mails').find('ul').append("<li><div id='mail_notify_" + index + "' class='item-req'>来之" + mail.from + "的" + mail.topic + " - " + mail.time + "</div></li>");
+          return $moreMails.find('ul').append("<li><div id='mail_notify_" + index + "' class='item-req'>来之" + mail.from + "的" + mail.topic + " - " + mail.time + "</div></li>");
         });
-        return $('#more-mails').find('ul a').attr('target', '_blank');
+        return $moreMails.find('ul a').attr('target', '_blank');
       });
       return false;
     });
-    return this.mailLink.after(this.popbox);
+    return $mailLink.after(popbox);
   });
 
 }).call(this);
