@@ -1,0 +1,13 @@
+{
+  "name": "Douban Popmail",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Popup douban mail",
+  "content_scripts": [
+    {
+      "matches": ["http://*.douban.com/*"],
+      "css": ["popmail.css"],
+      "js": ["jquery-1.8.3.min.js", "popmail.js"]
+    }
+  ]
+}
